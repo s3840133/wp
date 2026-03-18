@@ -58,10 +58,94 @@
         </div>
     </nav>
 
-    <main class="container my-5">
-        <h2>Welceom to PetConnect</h2>
-        <p>Browse pets looking for a loving home.</p>
-    </main>
+    <main class="my-5">
+
+    <section class="container mb-5">
+        <div id="petCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner rounded">
+                <div class="carousel-item active">
+                    <img src="assets/images/pets/pet1.jpg" class="d-block w-100" alt="Friendly dog available for adoption">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Meet your new best friend</h3>
+                        <p>Discover loving pets waiting for a forever home.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets/images/pets/pet2.jpg" class="d-block w-100" alt="Cat available for adoption">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Adopt with confidence</h3>
+                        <p>Browse pets and find the perfect companion.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets/images/pets/pet3.jpg" class="d-block w-100" alt="Happy pet in shelter care">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Give a pet a second chance</h3>
+                        <p>Your future companion could be waiting here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#petCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#petCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="text-center mb-4">
+            <h2>Welcome to PetConnect</h2>
+            <p>Browse pets looking for a loving home.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/pets/pet1.jpg" class="card-img-top" alt="Buddy the dog">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Buddy</h3>
+                        <p class="card-text">A playful and friendly dog who loves walks and attention.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/pets/pet2.jpg" class="card-img-top" alt="Luna the cat">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Luna</h3>
+                        <p class="card-text">A calm and affectionate cat who enjoys naps and cuddles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/pets/pet3.jpg" class="card-img-top" alt="Max the puppy">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">Max</h3>
+                        <p class="card-text">An energetic puppy ready for a fun and loving family.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
 
     <footer class="bg-dark text-white py-3 mt-5">
         <div class="container text-center">
