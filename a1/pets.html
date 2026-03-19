@@ -59,20 +59,71 @@
     </nav>
 
     <main class="container my-5">
-        <h2>Available Pets</h2>
-        <p>View pet details and adoption information.</p>
-    </main>
 
-    <footer class="bg-dark text-white py-3 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">© 2026 PetConnect | Created by Daniel Dobric</p>
+    <div class="row g-4">
+
+        <!-- Left Column: Banner Image -->
+        <div class="col-lg-5">
+            <img src="assets/images/pets/banner.jpg" 
+                 class="img-fluid rounded shadow-sm" 
+                 alt="Group of pets available for adoption">
         </div>
-    </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Right Column: Table -->
+        <div class="col-lg-7">
 
-    <!-- Custom JS -->
-    <script src="assets/js/scripts.js"></script>
-</body>
-</html>
+            <h2 class="mb-4">Available Pets</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover shadow-sm">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Age</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Buddy</td>
+                            <td>Dog</td>
+                            <td>2 years</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>Luna</td>
+                            <td>Cat</td>
+                            <td>1 year</td>
+                            <td>Adopted</td>
+                        </tr>
+                        <tr>
+                            <td>Max</td>
+                            <td>Dog</td>
+                            <td>6 months</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>Daisy</td>
+                            <td>Rabbit</td>
+                            <td>1 year</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>Charlie</td>
+                            <td>Dog</td>
+                            <td>3 years</td>
+                            <td>Adopted</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

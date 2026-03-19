@@ -19,3 +19,8 @@ h1, h2, h3, .navbar-brand {
 .carousel {
     margin-bottom: 40px;
 }
+
+table {
+    border-radius: 8px;
+    overflow: hidden;
+}
