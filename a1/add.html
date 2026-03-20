@@ -51,7 +51,7 @@
                         <a class="nav-link" href="gallery.html">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="add.html">Add Pet</a>
+                        <a class="nav-link active" href="add.html">Add Pet</a>
                     </li>
                 </ul>
             </div>
@@ -59,13 +59,81 @@
     </nav>
 
     <main class="container my-5">
-        <h2>Add a Pet</h2>
-        <p>Use the form below to submit a new pet profile.</p>
-    </main>
+
+    <section class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <h2 class="mb-4 text-center">Add a Pet</h2>
+            <p class="text-center mb-4">Submit a new pet profile for adoption.</p>
+
+            <form id="petForm" class="p-4 border rounded shadow-sm bg-light">
+
+                <div class="mb-3">
+                    <label for="petName" class="form-label">Pet Name</label>
+                    <input type="text" class="form-control" id="petName" name="petName" placeholder="Enter pet name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="petType" class="form-label">Pet Type</label>
+                    <select class="form-select" id="petType" name="petType" required>
+                        <option value="">Select pet type</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Rabbit">Rabbit</option>
+                        <option value="Bird">Bird</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="petAge" class="form-label">Age</label>
+                    <input type="text" class="form-control" id="petAge" name="petAge" placeholder="Example: 2 years" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label d-block">Status</label>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="petStatus" id="available" value="Available" required>
+                        <label class="form-check-label" for="available">Available</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="petStatus" id="adopted" value="Adopted" required>
+                        <label class="form-check-label" for="adopted">Adopted</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="petDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="petDescription" name="petDescription" rows="4" placeholder="Write a short description of the pet" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="petImage" class="form-label">Upload Pet Image</label>
+                    <input class="form-control" type="file" id="petImage" name="petImage" accept=".jpg,.jpeg,.png,.webp" required>
+                    <div class="form-text">Accepted file types: JPG, JPEG, PNG, WEBP</div>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <img id="imagePreview" src="" alt="Preview of selected pet" class="img-fluid rounded shadow-sm d-none preview-image">
+                </div>
+
+                <div id="fileError" class="text-danger mb-3"></div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark">Submit Pet</button>
+                </div>
+
+            </form>
+
+        </div>
+    </section>
+
+</main>
 
     <footer class="bg-dark text-white py-3 mt-5">
         <div class="container text-center">
-            <p class="mb-0">© 2026 PetConnect | Created by Daniel Dobric</p>
+            <p class="mb-0">© 2026 PetConnect | Created by S3840133</p>
         </div>
     </footer>
 

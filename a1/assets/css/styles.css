@@ -1,9 +1,18 @@
 body {
     font-family: 'Inter', sans-serif;
+    line-height: 1.6;
 }
 
 h1, h2, h3, .navbar-brand {
     font-family: 'Poppins', sans-serif;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+.carousel {
+    margin-bottom: 40px;
 }
 
 .carousel-item img {
@@ -11,16 +20,37 @@ h1, h2, h3, .navbar-brand {
     object-fit: cover;
 }
 
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
 .card img {
     height: 250px;
     object-fit: cover;
 }
 
-.carousel {
-    margin-bottom: 40px;
-}
-
 table {
     border-radius: 8px;
     overflow: hidden;
+}
+
+.gallery-img {
+    height: 250px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#modalImage {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.preview-image {
+    max-height: 300px;
+    object-fit: cover;
+}
+
+form {
+    background-color: #f8f9fa;
 }

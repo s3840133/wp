@@ -48,7 +48,7 @@
                         <a class="nav-link" href="pets.html">Pets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gallery.html">Gallery</a>
+                        <a class="nav-link active" href="gallery.html">Gallery</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="add.html">Add Pet</a>
@@ -59,13 +59,153 @@
     </nav>
 
     <main class="container my-5">
+
+    <section class="text-center mb-4">
         <h2>Pet Gallery</h2>
-        <p>Browse photos of out pets currently in our care.</p>
-    </main>
+        <p>Browse pets currently in our care.</p>
+    </section>
+
+    <section class="mb-4 text-center">
+        <button class="btn btn-dark me-2 filter-btn" data-filter="all">All</button>
+        <button class="btn btn-outline-dark me-2 filter-btn" data-filter="available">Available</button>
+        <button class="btn btn-outline-dark filter-btn" data-filter="adopted">Adopted</button>
+    </section>
+
+    <section class="row g-4" id="galleryGrid">
+
+        <div class="col-sm-6 col-lg-4 gallery-item" data-status="available">
+            <div class="card h-100 shadow-sm">
+                <img src="assets/images/pets/pet1.jpg"
+                     class="card-img-top gallery-img"
+                     alt="Golden retriever named Buddy available for adoption"
+                     data-bs-toggle="modal"
+                     data-bs-target="#galleryModal"
+                     data-title="Buddy"
+                     data-status-text="Available"
+                     data-description="Buddy is a playful and friendly dog who loves walks and attention.">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Buddy</h3>
+                    <p class="card-text mb-1">Status: Available</p>
+                    <p class="card-text">Friendly golden retriever.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 gallery-item" data-status="adopted">
+            <div class="card h-100 shadow-sm">
+                <img src="assets/images/pets/pet2.jpg"
+                     class="card-img-top gallery-img"
+                     alt="Tabby cat named Luna adopted into a home"
+                     data-bs-toggle="modal"
+                     data-bs-target="#galleryModal"
+                     data-title="Luna"
+                     data-status-text="Adopted"
+                     data-description="Luna is a calm and affectionate cat who enjoys naps and cuddles.">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Luna</h3>
+                    <p class="card-text mb-1">Status: Adopted</p>
+                    <p class="card-text">Calm and affectionate tabby cat.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 gallery-item" data-status="available">
+            <div class="card h-100 shadow-sm">
+                <img src="assets/images/pets/pet3.jpg"
+                     class="card-img-top gallery-img"
+                     alt="Chocolate labrador named Max available for adoption"
+                     data-bs-toggle="modal"
+                     data-bs-target="#galleryModal"
+                     data-title="Max"
+                     data-status-text="Available"
+                     data-description="Max is an energetic young dog ready for a fun and loving family.">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Max</h3>
+                    <p class="card-text mb-1">Status: Available</p>
+                    <p class="card-text">Energetic and loving labrador.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 gallery-item" data-status="available">
+            <div class="card h-100 shadow-sm">
+                <img src="assets/images/pets/pet6.jpg"
+                     class="card-img-top gallery-img"
+                     alt="Small dog named Daisy available for adoption"
+                     data-bs-toggle="modal"
+                     data-bs-target="#galleryModal"
+                     data-title="Daisy"
+                     data-status-text="Available"
+                     data-description="Daisy is a gentle pet who enjoys company and quiet time.">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Daisy</h3>
+                    <p class="card-text mb-1">Status: Available</p>
+                    <p class="card-text">Gentle and sweet companion.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 gallery-item" data-status="adopted">
+            <div class="card h-100 shadow-sm">
+                <img src="assets/images/pets/pet8.jpg"
+                     class="card-img-top gallery-img"
+                     alt="Dog named Charlie adopted into a new home"
+                     data-bs-toggle="modal"
+                     data-bs-target="#galleryModal"
+                     data-title="Charlie"
+                     data-status-text="Adopted"
+                     data-description="Charlie is a loyal dog who has already found a forever home.">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Charlie</h3>
+                    <p class="card-text mb-1">Status: Adopted</p>
+                    <p class="card-text">Loyal dog with a calm nature.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4 gallery-item" data-status="available">
+            <div class="card h-100 shadow-sm">
+                <img src="assets/images/pets/pet7.jpg"
+                     class="card-img-top gallery-img"
+                     alt="Cat named Milo available for adoption"
+                     data-bs-toggle="modal"
+                     data-bs-target="#galleryModal"
+                     data-title="Milo"
+                     data-status-text="Available"
+                     data-description="Milo is a curious and playful cat looking for a caring family.">
+                <div class="card-body">
+                    <h3 class="h5 card-title">Milo</h3>
+                    <p class="card-text mb-1">Status: Available</p>
+                    <p class="card-text">Curious and playful cat.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="galleryModalLabel">Pet Details</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <img src="" id="modalImage" class="img-fluid rounded mb-3" alt="Selected pet image">
+                    <h3 id="modalPetName" class="h4"></h3>
+                    <p id="modalPetStatus" class="mb-2"></p>
+                    <p id="modalPetDescription"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
 
     <footer class="bg-dark text-white py-3 mt-5">
         <div class="container text-center">
-            <p class="mb-0">© 2026 PetConnect | Created by Daniel Dobric</p>
+            <p class="mb-0">© 2026 PetConnect | Created by S3840133</p>
         </div>
     </footer>
 
