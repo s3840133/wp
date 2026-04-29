@@ -1,0 +1,659 @@
+/* =========================
+   Global Theme
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #111827;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: #818cf8;
+}
+
+a:hover {
+    color: #ec4899;
+}
+
+main {
+    background-color: #111827;
+    min-height: 80vh;
+}
+
+
+/* =========================
+   Navbar
+========================= */
+
+.navbar {
+    background-color: #6366f1;
+    padding: 16px 0;
+    margin-bottom: 0 !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-size: 28px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.navbar-brand .material-icons {
+    font-size: 32px;
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-icon {
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    color: #fce7f3 !important;
+}
+
+.nav-link.active {
+    color: #ffffff !important;
+}
+
+
+
+/* =========================
+   Carousel
+========================= */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+.carousel {
+    margin: 0 !important;
+}
+
+.carousel-inner {
+    margin: 0 !important;
+}
+
+.carousel-item img {
+    height: 400px !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    left: 2%;
+    right: 2%;
+    bottom: 25px;
+    background-color: #6366f1;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.carousel-caption h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.carousel-caption p {
+    display: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #6366f1;
+    border-radius: 50%;
+    padding: 25px;
+}
+
+
+/* =========================
+   Section Titles
+========================= */
+
+.section-title {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.section-title .material-icons {
+    color: #6366f1;
+    font-size: 34px;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: #ec4899;
+    margin-top: 10px;
+}
+
+
+/* =========================
+   Pet Cards
+========================= */
+
+.card {
+    background-color: #0f172a;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.card-img-top {
+    height: 165px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 18px 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.card-text {
+    color: #d1d5db;
+    font-weight: 700;
+}
+
+.pet-subtitle {
+    color: #d1d5db;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   Badges
+========================= */
+
+.badge {
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+.bg-primary {
+    background-color: #6366f1 !important;
+}
+
+.bg-danger {
+    background-color: #ec4899 !important;
+}
+
+
+/* =========================
+   Gallery
+========================= */
+
+.gallery-img {
+    height: 210px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    filter: brightness(80%);
+}
+
+.filter-btn {
+    border: 1px solid #6366f1;
+    color: #ffffff;
+    background-color: transparent;
+    font-weight: 700;
+}
+
+.filter-btn:hover,
+.filter-btn.active,
+.filter-btn.btn-dark {
+    background-color: #6366f1;
+    color: #ffffff;
+    border-color: #6366f1;
+}
+
+
+/* =========================
+   Tables
+========================= */
+
+.table {
+    background-color: #ffffff;
+    color: #1f2937;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table a {
+    color: #6366f1;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.table a:hover {
+    color: #ec4899;
+}
+
+
+/* =========================
+   Forms
+========================= */
+
+form {
+    background-color: #111827;
+    color: #ffffff;
+}
+
+.form-label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.form-control,
+.form-select,
+textarea {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+.preview-image {
+    max-height: 180px;
+    object-fit: cover;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.btn-primary {
+    background-color: #6366f1;
+    border-color: #6366f1;
+    font-weight: 700;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+.btn-danger,
+.btn-pink {
+    background-color: #ec4899;
+    border-color: #ec4899;
+    font-weight: 700;
+}
+
+.btn-danger:hover,
+.btn-pink:hover {
+    background-color: #db2777;
+    border-color: #db2777;
+}
+
+
+/* =========================
+   Modal
+========================= */
+
+.modal-content {
+    background-color: #0f172a;
+    color: #ffffff;
+    border: none;
+}
+
+.modal-header {
+    background-color: #6366f1;
+    border-bottom: none;
+}
+
+#modalImage {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+    background: linear-gradient(to right, #e5e7eb, #6b7280, #111827);
+    border-top: 3px solid #ec4899;
+    padding: 22px 0;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+
+/* =========================
+   Responsive Fixes
+========================= */
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 22px;
+    }
+
+    .nav-link {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .carousel-item img {
+        height: 240px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .card-img-top,
+    .gallery-img {
+        height: 220px;
+    }
+}
+
+.pets-heading {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.pets-heading h2 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pets-heading .material-icons {
+    color: #6366f1;
+    font-size: 36px;
+}
+
+.pets-heading::after {
+    content: "";
+    display: block;
+    width: 65px;
+    height: 4px;
+    background-color: #ec4899;
+    margin-top: 8px;
+}
+
+section.container {
+    max-width: 1200px;
+}
+
+.pet-section {
+    max-width: 1200px;
+    margin: 0 auto !important;
+    padding: 50px 20px !important;
+}
+
+.pet-section .row {
+    justify-content: center;
+}
+
+.pets-page {
+    background-color: #111827;
+    min-height: 80vh;
+    padding: 80px 0 70px;   /* more space at top */
+}
+
+.pets-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pets-title {
+    color: #818cf8;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.pets-banner {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.pets-table {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    width: 100%;
+    font-size: 16px;   /* bigger text */
+}
+
+.pets-table th {
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #1f2937;
+    padding: 18px 22px;   /* more space */
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.pets-table td {
+    padding: 18px 22px;   /* more space */
+    vertical-align: middle;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.pets-table tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.pets-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.table-responsive {
+    padding: 10px;
+}
+
+.pets-table a {
+    color: #6366f1;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.pets-table a:hover {
+    color: #ec4899;
+}
+
+.gallery-page {
+    background-color: #111827;
+    padding: 50px 0 70px;
+}
+
+.gallery-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gallery-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.gallery-title {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(to right, #818cf8, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gallery-filter {
+    width: 180px;
+}
+
+.gallery-filter label {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.gallery-filter .form-select {
+    height: 48px;
+    border-radius: 8px;
+}
+
+.add-title {
+    color: #8b5cf6;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-title .material-icons {
+    font-size: 42px;
+    color: #6366f1;
+}
+
+.nav-link.active {
+    background: linear-gradient(to right, #ec4899, #f43f5e);
+    color: white !important;
+    padding: 6px 14px;
+    border-radius: 8px;
+}
+
+.details-page {
+    background-color: #111827;
+    padding: 80px 0 70px;
+}
+
+.details-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.details-img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.details-title {
+    color: #8b5cf6;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.details-table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.details-table th,
+.details-table td {
+    padding: 15px;
+    color: #1f2937;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.details-table th {
+    width: 45%;
+    font-weight: 800;
+}
+
+.details-subtitle {
+    color: white;
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 20px;
+}
+
+.details-text {
+    color: white;
+    line-height: 1.7;
+}
