@@ -1,4 +1,4 @@
-<footer class="text-white py-3 mt-5">
+<footer class="text-white py-3">
     <div class="container text-center">
         <p class="mb-0">© 2026 PetConnect | Created by S3840133</p>
     </div>
