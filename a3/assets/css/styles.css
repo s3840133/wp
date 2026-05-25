@@ -1,0 +1,663 @@
+/* =========================
+   Global
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111827;
+    color: #ffffff;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    background-color: #111827;
+    flex: 1 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: #818cf8;
+}
+
+a:hover {
+    color: #ec4899;
+}
+
+
+/* =========================
+   Navbar
+========================= */
+
+.navbar {
+    background-color: #6366f1;
+    padding: 16px 0;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-size: 28px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.navbar-brand .material-icons {
+    font-size: 32px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-icon {
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    color: #fce7f3 !important;
+}
+
+.nav-link.active {
+    background: linear-gradient(to right, #ec4899, #f43f5e);
+    color: #ffffff !important;
+    padding: 6px 14px;
+    border-radius: 8px;
+}
+
+
+/* =========================
+   Carousel / Home
+========================= */
+
+.carousel {
+    margin: 0;
+}
+
+.carousel-inner {
+    margin: 0;
+}
+
+.carousel-item img {
+    height: 400px !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    left: 2%;
+    right: 2%;
+    bottom: 25px;
+    background-color: #6366f1;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.carousel-caption h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #6366f1;
+    border-radius: 50%;
+    padding: 25px;
+}
+
+.pet-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.pets-heading {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.pets-heading h2 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pets-heading .material-icons {
+    color: #6366f1;
+    font-size: 36px;
+}
+
+.pets-heading::after {
+    content: "";
+    display: block;
+    width: 65px;
+    height: 4px;
+    background-color: #ec4899;
+    margin-top: 8px;
+}
+
+
+/* =========================
+   Cards
+========================= */
+
+.card {
+    background-color: #0f172a;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.card-img-top {
+    height: 165px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 18px 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.card-text {
+    color: #d1d5db;
+    font-weight: 700;
+}
+
+.pet-subtitle {
+    color: #d1d5db;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   Badges
+========================= */
+
+.badge {
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+.bg-primary {
+    background-color: #6366f1 !important;
+}
+
+.bg-danger {
+    background-color: #ec4899 !important;
+}
+
+
+/* =========================
+   Browse Pets Page
+========================= */
+
+.pets-page {
+    background-color: #111827;
+    padding: 80px 0 70px;
+}
+
+.pets-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.pets-title {
+    color: #818cf8;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.pets-banner {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.table-responsive {
+    padding: 10px;
+}
+
+.pets-table {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    width: 100%;
+    font-size: 16px;
+}
+
+.pets-table th {
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #1f2937;
+    padding: 18px 22px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.pets-table td {
+    padding: 18px 22px;
+    vertical-align: middle;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.pets-table tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.pets-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.pets-table a {
+    color: #6366f1;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.pets-table a:hover {
+    color: #ec4899;
+}
+
+
+/* =========================
+   Gallery Page
+========================= */
+
+.gallery-page {
+    background-color: #111827;
+    padding: 50px 0 70px;
+}
+
+.gallery-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gallery-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.gallery-title {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(to right, #818cf8, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gallery-filter {
+    width: 180px;
+}
+
+.gallery-filter label {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.gallery-filter .form-select {
+    height: 48px;
+    border-radius: 8px;
+}
+
+.gallery-img {
+    height: 210px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    filter: brightness(80%);
+}
+
+
+/* =========================
+   Add Pet Page / Forms
+========================= */
+
+.add-page {
+    padding: 50px 0 70px;
+}
+
+.add-title {
+    color: #8b5cf6;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-title .material-icons {
+    font-size: 42px;
+    color: #6366f1;
+}
+
+form {
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+.form-label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.form-control,
+.form-select,
+textarea {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+#imagePreview {
+    max-height: 180px;
+    object-fit: cover;
+}
+
+
+/* =========================
+   Details Page
+========================= */
+
+.details-page {
+    background-color: #111827;
+    padding: 80px 0 70px;
+}
+
+.details-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.details-img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.details-title {
+    color: #8b5cf6;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.details-table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.details-table th,
+.details-table td {
+    padding: 15px;
+    color: #1f2937;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.details-table th {
+    width: 45%;
+    font-weight: 800;
+}
+
+.details-subtitle {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 20px;
+}
+
+.details-text {
+    color: #ffffff;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.btn-primary {
+    background-color: #6366f1;
+    border-color: #6366f1;
+    font-weight: 700;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+.btn-danger,
+.btn-pink {
+    background-color: #ec4899;
+    border-color: #ec4899;
+    font-weight: 700;
+}
+
+.btn-danger:hover,
+.btn-pink:hover {
+    background-color: #db2777;
+    border-color: #db2777;
+}
+
+
+/* =========================
+   Modal
+========================= */
+
+.modal-content {
+    background-color: #0f172a;
+    color: #ffffff;
+    border: none;
+}
+
+.modal-header {
+    background-color: #6366f1;
+    border-bottom: none;
+}
+
+#modalImage {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+    background: linear-gradient(to right, #e5e7eb, #6b7280, #111827);
+    border-top: 3px solid #ec4899;
+    padding: 22px 0;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    margin-top: auto;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 22px;
+    }
+
+    .nav-link {
+        margin-top: 10px;
+    }
+
+    .carousel-item img {
+        height: 240px !important;
+    }
+
+    .pets-heading h2,
+    .gallery-title,
+    .add-title,
+    .details-title {
+        font-size: 28px;
+    }
+
+    .card-img-top,
+    .gallery-img {
+        height: 220px;
+    }
+
+    .gallery-top {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .gallery-filter {
+        width: 100%;
+    }
+
+    .details-img {
+        height: 300px;
+    }
+}
+
+.pet-section {
+    padding-bottom: 220px !important;
+}
+
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    position: relative;
+    z-index: 2;
+}
+
+/* FINAL FOOTER FIX */
+html,
+body {
+    min-height: 100%;
+    height: auto !important;
+}
+
+body {
+    display: block !important;
+}
+
+main {
+    min-height: calc(100vh - 160px);
+    display: block !important;
+    overflow: visible !important;
+}
+
+.pet-section {
+    padding-bottom: 120px !important;
+}
+
+footer {
+    position: static !important;
+    margin-top: 0 !important;
+    clear: both;
+}
+
+/* Home page spacing fix */
+.pet-section {
+    padding-top: 60px !important;
+    padding-bottom: 260px !important;
+}
+
+footer {
+    position: relative !important;
+    margin-top: 0 !important;
+}
+
+/* =========================
+   A3 Shared Layout Helpers
+========================= */
+
+.site-footer {
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    flex-shrink: 0;
+}
+
+.placeholder-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 20px;
+}
+
+.placeholder-card {
+    background-color: #0f172a;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.navbar .form-control {
+    min-width: 180px;
+}

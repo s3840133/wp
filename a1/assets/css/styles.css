@@ -1,56 +1,87 @@
 body {
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
+    background-color: #111827;
+    color: white;
 }
 
 h1, h2, h3, .navbar-brand {
     font-family: 'Poppins', sans-serif;
 }
 
-.material-icons {
-    vertical-align: middle;
+/* NAVBAR */
+.navbar {
+    background-color: #6366f1;
 }
 
-.carousel {
-    margin-bottom: 40px;
+.navbar-brand,
+.nav-link {
+    color: white !important;
 }
 
+.nav-link.active {
+    background-color: #ec4899;
+    border-radius: 6px;
+}
+
+/* CAROUSEL */
 .carousel-item img {
     height: 450px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
+/* CARDS */
 .card {
+    background-color: #0f172a;
     border: none;
     border-radius: 12px;
+    color: white;
 }
 
 .card img {
-    height: 250px;
+    height: 220px;
     object-fit: cover;
 }
 
-table {
-    border-radius: 8px;
-    overflow: hidden;
-}
-
+/* GALLERY */
 .gallery-img {
     height: 250px;
     object-fit: cover;
     cursor: pointer;
 }
 
-#modalImage {
-    max-height: 500px;
-    object-fit: cover;
+/* TABLE */
+.table {
+    background-color: white;
+    border-radius: 10px;
 }
 
-.preview-image {
-    max-height: 300px;
-    object-fit: cover;
-}
-
+/* FORM */
 form {
-    background-color: #f8f9fa;
+    background-color: #1f2937;
+    color: white;
+    border-radius: 10px;
+}
+
+input, select, textarea {
+    background-color: #111827 !important;
+    color: white !important;
+    border: 1px solid #374151 !important;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background-color: #6366f1;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #ec4899;
+    border: none;
+}
+
+/* FOOTER */
+footer {
+    background: linear-gradient(to right, #e5e7eb, #111827);
+    border-top: 3px solid #ec4899;
 }
