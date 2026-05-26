@@ -1,37 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ===============================
-    // GALLERY MODAL (CLICK IMAGE)
-    // ===============================
-    const galleryImages = document.querySelectorAll(".gallery-img");
-    const modalImage = document.getElementById("modalImage");
-    const modalTitle = document.getElementById("galleryModalLabel");
-
-    galleryImages.forEach((image) => {
-        image.addEventListener("click", function () {
-            if (modalImage) {
-                modalImage.src = this.src;
-                modalImage.alt = this.alt;
-            }
-
-            if (modalTitle) {
-                modalTitle.textContent = this.dataset.title;
-            }
-        });
-    });
-
-    // ===============================
-    // DROPDOWN FILTER (GALLERY PAGE)
-    // ===============================
-    const statusFilter = document.getElementById("statusFilter");
+    // Gallery category filter
+    const categoryFilter = document.getElementById("categoryFilter");
     const galleryItems = document.querySelectorAll(".gallery-item");
 
-    if (statusFilter) {
-        statusFilter.addEventListener("change", function () {
-            const filterValue = this.value;
+    if (categoryFilter) {
+        categoryFilter.addEventListener("change", function () {
+            const selectedCategory = categoryFilter.value;
 
             galleryItems.forEach(function (item) {
-                if (filterValue === "all" || item.dataset.status === filterValue) {
+                const itemCategory = item.dataset.category;
+
+                if (selectedCategory === "all" || itemCategory === selectedCategory) {
                     item.style.display = "block";
                 } else {
                     item.style.display = "none";
@@ -40,66 +20,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ===============================
-    // IMAGE UPLOAD PREVIEW (ADD PET)
-    // ===============================
-    const petImageInput = document.getElementById("petImage");
-    const imagePreview = document.getElementById("imagePreview");
-    const fileError = document.getElementById("fileError");
+    // Gallery image modal
+    const imageModal = document.getElementById("imageModal");
 
-    if (petImageInput) {
-        petImageInput.addEventListener("change", function () {
-            const file = this.files[0];
+    if (imageModal) {
+        imageModal.addEventListener("show.bs.modal", function (event) {
+            const clickedImage = event.relatedTarget;
+            const imageSrc = clickedImage.getAttribute("data-img");
+            const imageTitle = clickedImage.getAttribute("data-title");
 
-            if (!file) {
-                if (imagePreview) {
-                    imagePreview.src = "";
-                    imagePreview.classList.add("d-none");
-                }
-                if (fileError) fileError.textContent = "";
-                return;
-            }
+            const modalImage = document.getElementById("modalImage");
+            const modalTitle = document.getElementById("modalTitle");
 
-            const validTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-
-            if (!validTypes.includes(file.type)) {
-                if (fileError) {
-                    fileError.textContent = "Please upload a valid image (JPG, PNG, WEBP, GIF).";
-                }
-
-                this.value = "";
-
-                if (imagePreview) {
-                    imagePreview.src = "";
-                    imagePreview.classList.add("d-none");
-                }
-                return;
-            }
-
-            if (fileError) fileError.textContent = "";
-
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                if (imagePreview) {
-                    imagePreview.src = event.target.result;
-                    imagePreview.classList.remove("d-none");
-                }
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    // ===============================
-    // FORM VALIDATION (ADD PET)
-    // ===============================
-    const petForm = document.getElementById("petForm");
-
-    if (petForm) {
-        petForm.addEventListener("submit", function (event) {
-            if (!petForm.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+            modalImage.src = imageSrc;
+            modalTitle.textContent = imageTitle;
         });
     }
 

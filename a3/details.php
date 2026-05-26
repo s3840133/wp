@@ -1,96 +1,130 @@
 <?php
-include 'includes/db_connect.inc';
+$pageTitle = "PetConnect | Pet Details";
+include "includes/db_connect.inc";
 
-$pageTitle = "PetConnect | Details";
-
-if (!isset($_GET['id'])) {
-    die("No pet selected.");
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header("Location: pets.php");
+    exit;
 }
 
-$pet_id = $_GET['id'];
+$pet_id = (int) $_GET['id'];
 
-$sql = "SELECT * FROM pets WHERE pet_id = ?";
+$sql = "SELECT 
+            pet_id,
+            name,
+            species,
+            breed,
+            age_years,
+            age_months,
+            gender,
+            size,
+            description,
+            health_info,
+            image_path,
+            adoption_fee,
+            status,
+            created_at
+        FROM pets
+        WHERE pet_id = ?";
+
 $stmt = mysqli_prepare($conn, $sql);
+
+if (!$stmt) {
+    die("SQL error: " . mysqli_error($conn));
+}
+
 mysqli_stmt_bind_param($stmt, "i", $pet_id);
 mysqli_stmt_execute($stmt);
+
 $result = mysqli_stmt_get_result($stmt);
 
-if (mysqli_num_rows($result) === 0) {
-    die("Pet not found.");
+if (!$result || mysqli_num_rows($result) === 0) {
+    header("Location: pets.php");
+    exit;
 }
 
 $pet = mysqli_fetch_assoc($result);
 
-include 'includes/header.inc';
-include 'includes/nav.inc';
+include "includes/header.inc";
+include "includes/nav.inc";
 ?>
 
-<main class="details-page">
-    <section class="details-wrapper">
+<main class="container my-5">
 
-        <div class="row g-4 align-items-start">
+    <div class="row g-5">
 
-            <div class="col-lg-5">
-                <img src="assets/images/pets/<?php echo htmlspecialchars($pet['image_path']); ?>"
-                     class="details-img"
-                     alt="<?php echo htmlspecialchars($pet['name']); ?>">
-            </div>
-
-            <div class="col-lg-7">
-                <h1 class="details-title">
-                    <?php echo htmlspecialchars($pet['name']); ?>
-                </h1>
-
-                <div class="mb-3">
-                    <span class="badge bg-primary"><?php echo htmlspecialchars($pet['species']); ?></span>
-                    <span class="badge bg-danger"><?php echo htmlspecialchars($pet['status']); ?></span>
+        <div class="col-md-6">
+            <?php if (!empty($pet['image_path'])): ?>
+                <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
+                     class="img-fluid rounded shadow detail-img gallery-img"
+                     alt="<?= htmlspecialchars($pet['name']) ?>"
+                     data-bs-toggle="modal"
+                     data-bs-target="#imageModal"
+                     data-img="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
+                     data-title="<?= htmlspecialchars($pet['name']) ?>">
+            <?php else: ?>
+                <div class="alert alert-secondary">
+                    No image available.
                 </div>
-
-                <table class="table details-table">
-                    <tr>
-                        <th>Breed:</th>
-                        <td><?php echo htmlspecialchars($pet['breed']); ?></td>
-                    </tr>
-                    <tr>
-                        <th>Age:</th>
-                        <td><?php echo htmlspecialchars($pet['age_years']); ?> years, <?php echo htmlspecialchars($pet['age_months']); ?> months</td>
-                    </tr>
-                    <tr>
-                        <th>Gender:</th>
-                        <td><?php echo htmlspecialchars($pet['gender']); ?></td>
-                    </tr>
-                    <tr>
-                        <th>Size:</th>
-                        <td><?php echo htmlspecialchars($pet['size']); ?></td>
-                    </tr>
-                    <tr>
-                        <th>Adoption Fee:</th>
-                        <td><strong>$<?php echo number_format($pet['adoption_fee'], 2); ?></strong></td>
-                    </tr>
-                </table>
-
-                <h2 class="details-subtitle">
-                    <span class="material-icons align-middle">article</span>
-                    Description
-                </h2>
-
-                <p class="details-text">
-                    <?php echo htmlspecialchars($pet['description']); ?>
-                </p>
-
-                <h2 class="details-subtitle">
-                    <span class="material-icons align-middle health-icon">health_and_safety</span>
-                    Health Information
-                </h2>
-
-                <p class="details-text">
-                    <?php echo htmlspecialchars($pet['health_info']); ?>
-                </p>
-            </div>
-
+            <?php endif; ?>
         </div>
 
-    </section>
+        <div class="col-md-6">
+            <h1><?= htmlspecialchars($pet['name']) ?></h1>
+
+            <p class="text-muted">
+                <?= htmlspecialchars($pet['species']) ?>
+                <?php if (!empty($pet['breed'])): ?>
+                    - <?= htmlspecialchars($pet['breed']) ?>
+                <?php endif; ?>
+            </p>
+
+            <p>
+                <strong>Age:</strong>
+                <?= htmlspecialchars($pet['age_years'] ?? '0') ?> years,
+                <?= htmlspecialchars($pet['age_months'] ?? '0') ?> months
+            </p>
+
+            <p><strong>Gender:</strong> <?= htmlspecialchars($pet['gender']) ?></p>
+            <p><strong>Size:</strong> <?= htmlspecialchars($pet['size']) ?></p>
+            <p><strong>Status:</strong> <?= htmlspecialchars($pet['status']) ?></p>
+            <p><strong>Adoption Fee:</strong> $<?= htmlspecialchars($pet['adoption_fee']) ?></p>
+
+            <hr>
+
+            <h3>Description</h3>
+            <p><?= nl2br(htmlspecialchars($pet['description'])) ?></p>
+
+            <h3>Health Information</h3>
+            <p>
+                <?= !empty($pet['health_info'])
+                    ? nl2br(htmlspecialchars($pet['health_info']))
+                    : "No health information provided." ?>
+            </p>
+
+            <hr>
+
+            <h3>Contact Owner</h3>
+            <p>Owner details will be available after login and ownership features are added.</p>
+
+        </div>
+    </div>
+
 </main>
 
-<?php include 'includes/footer.inc'; ?>
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Pet Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid rounded" alt="Pet preview">
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include "includes/footer.inc"; ?>
