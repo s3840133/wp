@@ -1,14 +1,10 @@
 <?php
-$pageTitle = "PetConnect | Logout";
-include 'includes/header.inc';
-include 'includes/nav.inc';
-?>
 
-<main class="placeholder-page">
-    <section class="placeholder-card">
-        <h1>Logout</h1>
-        <p>Logout session handling will be completed in the authentication commit.</p>
-    </section>
-</main>
+session_start();
 
-<?php include 'includes/footer.inc'; ?>
+session_unset();
+
+session_destroy();
+
+header("Location: index.php");
+exit;
