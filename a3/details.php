@@ -1,31 +1,21 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $pageTitle = "PetConnect | Pet Details";
+
 include "includes/db_connect.inc";
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
     header("Location: pets.php");
     exit;
 }
 
-$pet_id = (int) $_GET['id'];
+$pet_id = (int) $_GET["id"];
 
-$sql = "SELECT 
-            pet_id,
-            name,
-            species,
-            breed,
-            age_years,
-            age_months,
-            gender,
-            size,
-            description,
-            health_info,
-            image_path,
-            adoption_fee,
-            status,
-            created_at
-        FROM pets
-        WHERE pet_id = ?";
+$sql = "SELECT * FROM pets WHERE pet_id = ?";
 
 $stmt = mysqli_prepare($conn, $sql);
 
@@ -49,82 +39,137 @@ include "includes/header.inc";
 include "includes/nav.inc";
 ?>
 
-<main class="container my-5">
+<main class="container py-5">
 
-    <div class="row g-5">
+    <div class="row">
 
-        <div class="col-md-6">
-            <?php if (!empty($pet['image_path'])): ?>
-                <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                     class="img-fluid rounded shadow detail-img gallery-img"
-                     alt="<?= htmlspecialchars($pet['name']) ?>"
-                     data-bs-toggle="modal"
-                     data-bs-target="#imageModal"
-                     data-img="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                     data-title="<?= htmlspecialchars($pet['name']) ?>">
-            <?php else: ?>
-                <div class="alert alert-secondary">
-                    No image available.
+        <div class="col-lg-5 mb-4">
+
+            <?php if (!empty($pet["image_path"])) : ?>
+
+                <img
+                    src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
+                    alt="<?= htmlspecialchars($pet['name']) ?>"
+                    class="img-fluid rounded shadow"
+                >
+
+            <?php else : ?>
+
+                <div class="bg-secondary text-white text-center p-5 rounded">
+                    No Image Available
                 </div>
+
             <?php endif; ?>
+
         </div>
 
-        <div class="col-md-6">
-            <h1><?= htmlspecialchars($pet['name']) ?></h1>
+        <div class="col-lg-7">
 
-            <p class="text-muted">
-                <?= htmlspecialchars($pet['species']) ?>
-                <?php if (!empty($pet['breed'])): ?>
-                    - <?= htmlspecialchars($pet['breed']) ?>
+            <h1 class="mb-3">
+                <?= htmlspecialchars($pet["name"]) ?>
+            </h1>
+
+            <div class="mb-4">
+
+                <span class="badge bg-primary">
+                    <?= htmlspecialchars($pet["species"]) ?>
+                </span>
+
+                <?php if (!empty($pet["breed"])) : ?>
+                    <span class="badge bg-secondary">
+                        <?= htmlspecialchars($pet["breed"]) ?>
+                    </span>
                 <?php endif; ?>
-            </p>
 
-            <p>
-                <strong>Age:</strong>
-                <?= htmlspecialchars($pet['age_years'] ?? '0') ?> years,
-                <?= htmlspecialchars($pet['age_months'] ?? '0') ?> months
-            </p>
+                <span class="badge bg-success">
+                    <?= htmlspecialchars($pet["status"]) ?>
+                </span>
 
-            <p><strong>Gender:</strong> <?= htmlspecialchars($pet['gender']) ?></p>
-            <p><strong>Size:</strong> <?= htmlspecialchars($pet['size']) ?></p>
-            <p><strong>Status:</strong> <?= htmlspecialchars($pet['status']) ?></p>
-            <p><strong>Adoption Fee:</strong> $<?= htmlspecialchars($pet['adoption_fee']) ?></p>
+            </div>
 
-            <hr>
+            <div class="row mb-4">
 
-            <h3>Description</h3>
-            <p><?= nl2br(htmlspecialchars($pet['description'])) ?></p>
+                <div class="col-md-6 mb-3">
+                    <strong>Gender:</strong><br>
+                    <?= htmlspecialchars($pet["gender"]) ?>
+                </div>
 
-            <h3>Health Information</h3>
-            <p>
-                <?= !empty($pet['health_info'])
-                    ? nl2br(htmlspecialchars($pet['health_info']))
-                    : "No health information provided." ?>
-            </p>
+                <div class="col-md-6 mb-3">
+                    <strong>Size:</strong><br>
+                    <?= htmlspecialchars($pet["size"]) ?>
+                </div>
 
-            <hr>
+                <div class="col-md-6 mb-3">
+                    <strong>Age:</strong><br>
+                    <?= htmlspecialchars($pet["age_years"]) ?> years,
+                    <?= htmlspecialchars($pet["age_months"]) ?> months
+                </div>
 
-            <h3>Contact Owner</h3>
-            <p>Owner details will be available after login and ownership features are added.</p>
+                <div class="col-md-6 mb-3">
+                    <strong>Adoption Fee:</strong><br>
+                    $<?= htmlspecialchars($pet["adoption_fee"]) ?>
+                </div>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4>Description</h4>
+
+                <p>
+                    <?= nl2br(htmlspecialchars($pet["description"])) ?>
+                </p>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4>Health Information</h4>
+
+                <p>
+                    <?= nl2br(htmlspecialchars($pet["health_info"])) ?>
+                </p>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4>Contact Owner</h4>
+
+                <p>
+                    Please login to contact the owner regarding adoption.
+                </p>
+
+            </div>
+
+            <?php if (
+                isset($_SESSION["user_id"]) &&
+                (int)$_SESSION["user_id"] === (int)$pet["user_id"]
+            ) : ?>
+
+                <hr>
+
+                <div class="d-flex gap-2">
+
+                    <a href="edit.php?id=<?= htmlspecialchars($pet['pet_id']) ?>"
+                       class="btn btn-warning">
+                        Edit Pet
+                    </a>
+
+                    <a href="delete_pet.php?id=<?= htmlspecialchars($pet['pet_id']) ?>"
+                       class="btn btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this pet?');">
+                        Delete Pet
+                    </a>
+
+                </div>
+
+            <?php endif; ?>
 
         </div>
+
     </div>
 
 </main>
-
-<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="modalTitle" class="modal-title">Pet Image</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body text-center">
-                <img id="modalImage" src="" class="img-fluid rounded" alt="Pet preview">
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php include "includes/footer.inc"; ?>
