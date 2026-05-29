@@ -8,7 +8,7 @@
 
 html,
 body {
-    min-height: 100vh;
+    min-height: 100%;
     margin: 0;
 }
 
@@ -17,13 +17,11 @@ body {
     background-color: #111827;
     color: #ffffff;
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
 }
 
 main {
     background-color: #111827;
-    flex: 1 0 auto;
+    min-height: calc(100vh - 160px);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -38,7 +36,6 @@ a {
 a:hover {
     color: #ec4899;
 }
-
 
 /* =========================
    Navbar
@@ -76,10 +73,6 @@ a:hover {
     gap: 6px;
 }
 
-.nav-icon {
-    font-size: 16px;
-}
-
 .nav-link:hover {
     color: #fce7f3 !important;
 }
@@ -91,52 +84,99 @@ a:hover {
     border-radius: 8px;
 }
 
-
 /* =========================
-   Carousel / Home
+   Hero Carousel / Home
 ========================= */
 
-.carousel {
-    margin: 0;
+#petCarousel {
+    width: 100vw;
+    height: 320px;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    border-radius: 0 0 18px 18px;
+    position: relative;
+    background-color: #000000;
 }
 
-.carousel-inner {
-    margin: 0;
+#petCarousel .carousel-inner,
+#petCarousel .carousel-item {
+    height: 320px;
 }
 
-.carousel-item img {
-    height: 400px !important;
+#petCarousel .carousel-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+.hero-carousel-img {
     width: 100%;
+    height: 320px !important;
     object-fit: cover;
+    object-position: center;
 }
 
-.carousel-caption {
-    left: 2%;
-    right: 2%;
-    bottom: 25px;
-    background-color: #6366f1;
-    border-radius: 10px;
-    padding: 18px;
+.hero-caption {
+    position: absolute;
+    left: 25px;
+    right: 25px;
+    bottom: 22px;
+    z-index: 2;
+    background: #6366f1;
+    border-radius: 14px;
+    padding: 14px 20px;
+    text-align: center;
 }
 
-.carousel-caption h3 {
-    margin: 0;
-    font-size: 22px;
+.hero-caption h2 {
+    font-size: 1.4rem;
     font-weight: 800;
+    margin-bottom: 10px;
     color: #ffffff;
+}
+
+.hero-caption p {
+    display: none;
+}
+
+.hero-caption .btn {
+    background-color: #ffffff;
+    color: #111827;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 7px 18px;
+}
+
+.hero-caption .btn:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 10%;
+    z-index: 3;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: #6366f1;
     border-radius: 50%;
-    padding: 25px;
+    padding: 22px;
 }
+
+/* =========================
+   Home Pet Section
+========================= */
 
 .pet-section {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 20px;
+    padding: 60px 20px 120px;
 }
 
 .pets-heading {
@@ -167,7 +207,6 @@ a:hover {
     margin-top: 8px;
 }
 
-
 /* =========================
    Cards
 ========================= */
@@ -181,8 +220,9 @@ a:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-.card-img-top {
-    height: 165px;
+.card-img-top,
+.pet-card-img {
+    height: 210px;
     object-fit: cover;
 }
 
@@ -207,7 +247,6 @@ a:hover {
     margin-bottom: 8px;
 }
 
-
 /* =========================
    Badges
 ========================= */
@@ -225,7 +264,6 @@ a:hover {
 .bg-danger {
     background-color: #ec4899 !important;
 }
-
 
 /* =========================
    Browse Pets Page
@@ -302,7 +340,6 @@ a:hover {
     color: #ec4899;
 }
 
-
 /* =========================
    Gallery Page
 ========================= */
@@ -322,13 +359,17 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 35px;
+
+    max-width: 1200px;
+    margin: 0 auto 35px auto;
 }
 
 .gallery-title {
     font-size: 36px;
     font-weight: 800;
-    background: linear-gradient(to right, #818cf8, #ec4899);
+
+    background: linear-gradient(to right, #8b5cf6, #ec4899);
+
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -347,6 +388,8 @@ a:hover {
 .gallery-filter .form-select {
     height: 48px;
     border-radius: 8px;
+    background-color: #ffffff;
+    border: none;
 }
 
 .gallery-img {
@@ -359,9 +402,8 @@ a:hover {
     filter: brightness(80%);
 }
 
-
 /* =========================
-   Add Pet Page / Forms
+   Forms / Add / Edit
 ========================= */
 
 .add-page {
@@ -384,7 +426,7 @@ a:hover {
 }
 
 form {
-    background-color: #0f172a;
+    background-color: transparent;
     color: #ffffff;
 }
 
@@ -412,7 +454,6 @@ textarea:focus {
     max-height: 180px;
     object-fit: cover;
 }
-
 
 /* =========================
    Details Page
@@ -475,7 +516,6 @@ textarea:focus {
     line-height: 1.7;
 }
 
-
 /* =========================
    Buttons
 ========================= */
@@ -504,7 +544,6 @@ textarea:focus {
     border-color: #db2777;
 }
 
-
 /* =========================
    Modal
 ========================= */
@@ -525,21 +564,45 @@ textarea:focus {
     object-fit: cover;
 }
 
-
 /* =========================
    Footer
 ========================= */
 
-footer {
-    background: linear-gradient(to right, #e5e7eb, #6b7280, #111827);
-    border-top: 3px solid #ec4899;
+footer,
+.site-footer {
+    background: linear-gradient(
+        90deg,
+        #d4d4d8 0%,
+        #d4d4d8 35%,
+        #6b7280 65%,
+        #111827 100%
+    );
+
+    border-top: 3px solid #f59e0b;
     padding: 22px 0;
     color: #ffffff;
     font-weight: 700;
     text-align: center;
-    margin-top: auto;
+    position: static;
+    clear: both;
 }
 
+/* =========================
+   Placeholder Pages
+========================= */
+
+.placeholder-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 20px;
+}
+
+.placeholder-card {
+    background-color: #0f172a;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
 
 /* =========================
    Responsive
@@ -554,8 +617,25 @@ footer {
         margin-top: 10px;
     }
 
-    .carousel-item img {
+    #petCarousel {
+        height: 240px;
+    }
+
+    #petCarousel .carousel-inner,
+    #petCarousel .carousel-item,
+    .hero-carousel-img {
         height: 240px !important;
+    }
+
+    .hero-caption {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        padding: 10px;
+    }
+
+    .hero-caption h2 {
+        font-size: 1.1rem;
     }
 
     .pets-heading h2,
@@ -566,6 +646,7 @@ footer {
     }
 
     .card-img-top,
+    .pet-card-img,
     .gallery-img {
         height: 220px;
     }
@@ -582,82 +663,4 @@ footer {
     .details-img {
         height: 300px;
     }
-}
-
-.pet-section {
-    padding-bottom: 220px !important;
-}
-
-footer {
-    position: relative;
-    z-index: 1;
-}
-
-.card {
-    position: relative;
-    z-index: 2;
-}
-
-/* FINAL FOOTER FIX */
-html,
-body {
-    min-height: 100%;
-    height: auto !important;
-}
-
-body {
-    display: block !important;
-}
-
-main {
-    min-height: calc(100vh - 160px);
-    display: block !important;
-    overflow: visible !important;
-}
-
-.pet-section {
-    padding-bottom: 120px !important;
-}
-
-footer {
-    position: static !important;
-    margin-top: 0 !important;
-    clear: both;
-}
-
-/* Home page spacing fix */
-.pet-section {
-    padding-top: 60px !important;
-    padding-bottom: 260px !important;
-}
-
-footer {
-    position: relative !important;
-    margin-top: 0 !important;
-}
-
-/* =========================
-   A3 Shared Layout Helpers
-========================= */
-
-.site-footer {
-    background: linear-gradient(90deg, #6366f1, #ec4899);
-    flex-shrink: 0;
-}
-
-.placeholder-page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 70px 20px;
-}
-
-.placeholder-card {
-    background-color: #0f172a;
-    border-radius: 14px;
-    padding: 30px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-.navbar .form-control {
-    min-width: 180px;
 }

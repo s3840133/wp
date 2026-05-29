@@ -1,6 +1,6 @@
 <footer class="site-footer text-white py-3">
     <div class="container text-center">
-        <p class="mb-0">&copy; 2026 PetConnect | Created by Daniel Dobric</p>
+        <p class="mb-0">&copy; 2026 S3840133 Connecting Pets With Loving Homes.</p>
     </div>
 </footer>
 

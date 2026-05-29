@@ -3,20 +3,26 @@ $pageTitle = "PetConnect | Browse Pets";
 
 include "includes/db_connect.inc";
 
+function getPetImage($imagePath) {
+    if (!empty($imagePath) && file_exists(__DIR__ . "/assets/images/pets/" . $imagePath)) {
+        return "assets/images/pets/" . htmlspecialchars($imagePath);
+    }
+
+    return "assets/images/banner.jpg";
+}
+
 $sql = "SELECT 
-            pet_id,
-            name,
-            species,
-            breed,
-            age_years,
-            age_months,
-            gender,
-            size,
-            image_path,
-            adoption_fee,
-            status
+            pets.pet_id,
+            pets.name,
+            pets.species,
+            pets.breed,
+            pets.size,
+            pets.adoption_fee,
+            pets.image_path,
+            users.username
         FROM pets
-        ORDER BY created_at DESC";
+        LEFT JOIN users ON pets.user_id = users.user_id
+        ORDER BY pets.created_at DESC";
 
 $stmt = mysqli_prepare($conn, $sql);
 
@@ -31,83 +37,64 @@ include "includes/header.inc";
 include "includes/nav.inc";
 ?>
 
-<main class="container py-5">
+<main class="pets-page">
 
-    <h1 class="mb-4">Browse Pets</h1>
+    <div class="pets-wrapper">
 
-    <?php if ($result && mysqli_num_rows($result) > 0): ?>
+        <h1 class="pets-title">All Available Pets</h1>
 
-        <div class="row g-4">
+        <div class="row align-items-start g-4">
 
-            <?php while ($pet = mysqli_fetch_assoc($result)): ?>
+            <div class="col-lg-4">
+                <img src="assets/images/banner.jpg"
+                     alt="Pets"
+                     class="pets-banner shadow">
+            </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="col-lg-8">
 
-                    <div class="card h-100 shadow-sm pet-card">
+                <div class="table-responsive">
 
-                        <?php if (!empty($pet['image_path'])): ?>
-                            <img
-                                src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                                alt="<?= htmlspecialchars($pet['name']) ?>"
-                                class="card-img-top pet-card-img"
-                            >
-                        <?php else: ?>
-                            <div class="bg-secondary text-white text-center p-5">
-                                No image
-                            </div>
-                        <?php endif; ?>
+                    <table class="pets-table">
 
-                        <div class="card-body text-center">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Species</th>
+                                <th>Breed</th>
+                                <th>Size</th>
+                                <th>Fee ($)</th>
+                                <th>Owner</th>
+                            </tr>
+                        </thead>
 
-                            <h5 class="card-title">
-                                <?= htmlspecialchars($pet['name']) ?>
-                            </h5>
+                        <tbody>
+                            <?php while ($pet = mysqli_fetch_assoc($result)) : ?>
+                                <tr>
+                                    <td>
+                                        <a href="details.php?id=<?= htmlspecialchars($pet['pet_id']) ?>">
+                                            <?= htmlspecialchars($pet['name']) ?>
+                                        </a>
+                                    </td>
 
-                            <p class="card-text">
-                                <?= htmlspecialchars($pet['species']) ?>
-                                <?php if (!empty($pet['breed'])): ?>
-                                    | <?= htmlspecialchars($pet['breed']) ?>
-                                <?php endif; ?>
-                            </p>
+                                    <td><?= htmlspecialchars($pet['species']) ?></td>
+                                    <td><?= htmlspecialchars($pet['breed']) ?></td>
+                                    <td><?= htmlspecialchars($pet['size']) ?></td>
+                                    <td><?= htmlspecialchars($pet['adoption_fee']) ?></td>
+                                    <td><?= htmlspecialchars($pet['username'] ?? 'Unknown') ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
 
-                            <p class="card-text">
-                                <strong>Status:</strong>
-                                <?= htmlspecialchars($pet['status']) ?>
-                            </p>
-
-                            <p class="card-text">
-                                <strong>Age:</strong>
-                                <?= htmlspecialchars($pet['age_years'] ?? 0) ?> years,
-                                <?= htmlspecialchars($pet['age_months'] ?? 0) ?> months
-                            </p>
-
-                            <p class="card-text">
-                                <strong>Fee:</strong>
-                                $<?= htmlspecialchars($pet['adoption_fee']) ?>
-                            </p>
-
-                            <a href="details.php?id=<?= htmlspecialchars($pet['pet_id']) ?>"
-                               class="btn btn-primary">
-                                View Details
-                            </a>
-
-                        </div>
-
-                    </div>
+                    </table>
 
                 </div>
 
-            <?php endwhile; ?>
+            </div>
 
         </div>
 
-    <?php else: ?>
-
-        <div class="alert alert-info">
-            No pets are currently available.
-        </div>
-
-    <?php endif; ?>
+    </div>
 
 </main>
 

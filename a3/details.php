@@ -8,6 +8,14 @@ $pageTitle = "PetConnect | Pet Details";
 
 include "includes/db_connect.inc";
 
+function getPetImage($imagePath) {
+    if (!empty($imagePath) && file_exists(__DIR__ . "/assets/images/pets/" . $imagePath)) {
+        return "assets/images/pets/" . htmlspecialchars($imagePath);
+    }
+
+    return "assets/images/banner.jpg";
+}
+
 if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
     header("Location: pets.php");
     exit;
@@ -15,7 +23,10 @@ if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
 
 $pet_id = (int) $_GET["id"];
 
-$sql = "SELECT * FROM pets WHERE pet_id = ?";
+$sql = "SELECT pets.*, users.username, users.email, users.phone, users.location
+        FROM pets
+        LEFT JOIN users ON pets.user_id = users.user_id
+        WHERE pets.pet_id = ?";
 
 $stmt = mysqli_prepare($conn, $sql);
 
@@ -45,21 +56,9 @@ include "includes/nav.inc";
 
         <div class="col-lg-5 mb-4">
 
-            <?php if (!empty($pet["image_path"])) : ?>
-
-                <img
-                    src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                    alt="<?= htmlspecialchars($pet['name']) ?>"
-                    class="img-fluid rounded shadow"
-                >
-
-            <?php else : ?>
-
-                <div class="bg-secondary text-white text-center p-5 rounded">
-                    No Image Available
-                </div>
-
-            <?php endif; ?>
+            <img src="<?= getPetImage($pet['image_path']) ?>"
+                 alt="<?= htmlspecialchars($pet['name']) ?>"
+                 class="img-fluid rounded shadow">
 
         </div>
 
@@ -113,32 +112,31 @@ include "includes/nav.inc";
             </div>
 
             <div class="mb-4">
-
                 <h4>Description</h4>
-
-                <p>
-                    <?= nl2br(htmlspecialchars($pet["description"])) ?>
-                </p>
-
+                <p><?= nl2br(htmlspecialchars($pet["description"])) ?></p>
             </div>
 
             <div class="mb-4">
-
                 <h4>Health Information</h4>
-
                 <p>
-                    <?= nl2br(htmlspecialchars($pet["health_info"])) ?>
+                    <?= !empty($pet["health_info"])
+                        ? nl2br(htmlspecialchars($pet["health_info"]))
+                        : "No health information provided." ?>
                 </p>
-
             </div>
 
             <div class="mb-4">
 
                 <h4>Contact Owner</h4>
 
-                <p>
-                    Please login to contact the owner regarding adoption.
-                </p>
+                <?php if (!empty($pet["username"])) : ?>
+                    <p><strong>Owner:</strong> <?= htmlspecialchars($pet["username"]) ?></p>
+                    <p><strong>Email:</strong> <?= htmlspecialchars($pet["email"]) ?></p>
+                    <p><strong>Phone:</strong> <?= htmlspecialchars($pet["phone"] ?? "Not provided") ?></p>
+                    <p><strong>Location:</strong> <?= htmlspecialchars($pet["location"] ?? "Not provided") ?></p>
+                <?php else : ?>
+                    <p>Owner details are currently unavailable.</p>
+                <?php endif; ?>
 
             </div>
 

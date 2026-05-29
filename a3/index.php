@@ -1,17 +1,34 @@
 <?php
+
 $pageTitle = "PetConnect | Home";
+
 include "includes/db_connect.inc";
 
-$sql = "SELECT pet_id, name, species, breed, image_path, description, created_at 
-        FROM pets 
-        ORDER BY created_at DESC 
-        LIMIT 4";
+function getPetImage($imagePath) {
+    if (!empty($imagePath) && file_exists(__DIR__ . "/assets/images/pets/" . $imagePath)) {
+        return "assets/images/pets/" . htmlspecialchars($imagePath);
+    }
+
+    return "assets/images/banner.jpg";
+}
+
+$sql = "SELECT pets.*, users.username
+        FROM pets
+        LEFT JOIN users ON pets.user_id = users.user_id
+        ORDER BY pets.created_at DESC
+        LIMIT 5";
 
 $stmt = mysqli_prepare($conn, $sql);
+
+if (!$stmt) {
+    die("SQL error: " . mysqli_error($conn));
+}
+
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 $pets = [];
+
 while ($row = mysqli_fetch_assoc($result)) {
     $pets[] = $row;
 }
@@ -20,81 +37,107 @@ include "includes/header.inc";
 include "includes/nav.inc";
 ?>
 
-<main class="container my-5">
+<main class="container-fluid p-0">
 
-    <section class="text-center mb-5">
-        <h1 class="display-5 fw-bold">Welcome to PetConnect</h1>
-        <p class="lead">Find loving pets waiting for their forever home.</p>
-    </section>
+    <div id="petCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-    <?php if (!empty($pets)): ?>
-        <section class="mb-5">
-            <div id="petCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
 
-                <div class="carousel-indicators">
-                    <?php foreach ($pets as $index => $pet): ?>
-                        <button type="button"
-                                data-bs-target="#petCarousel"
-                                data-bs-slide-to="<?= $index ?>"
-                                class="<?= $index === 0 ? 'active' : '' ?>">
-                        </button>
-                    <?php endforeach; ?>
-                </div>
+            <?php foreach ($pets as $index => $pet) : ?>
 
-                <div class="carousel-inner rounded shadow">
-                    <?php foreach ($pets as $index => $pet): ?>
-                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                            <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                                 class="d-block w-100 carousel-img"
-                                 alt="<?= htmlspecialchars($pet['name']) ?>">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5><?= htmlspecialchars($pet['name']) ?></h5>
-                                <p><?= htmlspecialchars($pet['species']) ?> - <?= htmlspecialchars($pet['breed']) ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#petCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </button>
+                    <img src="<?= getPetImage($pet['image_path']) ?>"
+                         class="d-block w-100 hero-carousel-img"
+                         alt="<?= htmlspecialchars($pet['name']) ?>">
 
-                <button class="carousel-control-next" type="button" data-bs-target="#petCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </button>
+                    <div class="carousel-caption hero-caption">
 
-            </div>
-        </section>
+                        <h2><?= htmlspecialchars($pet['name']) ?></h2>
 
-        <section>
-            <h2 class="mb-4">Latest Pets</h2>
+                        <a href="details.php?id=<?= htmlspecialchars($pet['pet_id']) ?>"
+                           class="btn btn-light">
+                            <span class="material-icons align-middle">visibility</span>
+                            View Details
+                        </a>
 
-            <div class="row g-4">
-                <?php foreach ($pets as $pet): ?>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card h-100 shadow-sm">
-                            <img src="assets/images/pets/<?= htmlspecialchars($pet['image_path']) ?>"
-                                 class="card-img-top pet-card-img"
-                                 alt="<?= htmlspecialchars($pet['name']) ?>">
-
-                            <div class="card-body">
-                                <h5 class="card-title"><?= htmlspecialchars($pet['name']) ?></h5>
-                                <p class="card-text">
-                                    <?= htmlspecialchars($pet['species']) ?> -
-                                    <?= htmlspecialchars($pet['breed']) ?>
-                                </p>
-                                <a href="details.php?id=<?= $pet['pet_id'] ?>" class="btn btn-primary">
-                                    View Details
-                                </a>
-                            </div>
-                        </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-    <?php else: ?>
-        <p>No pets found.</p>
-    <?php endif; ?>
+
+                </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#petCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#petCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+
+    <section class="pet-section">
+
+        <div class="pets-heading">
+            <h2>
+                <span class="material-icons">favorite</span>
+                Recently Added Pets
+            </h2>
+        </div>
+
+        <div class="row g-4">
+
+            <?php foreach ($pets as $pet) : ?>
+
+                <div class="col-sm-6 col-md-4 col-lg-3">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <img src="<?= getPetImage($pet['image_path']) ?>"
+                             class="card-img-top pet-card-img"
+                             alt="<?= htmlspecialchars($pet['name']) ?>">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                <?= htmlspecialchars($pet['name']) ?>
+                            </h5>
+
+                            <p class="pet-subtitle">
+                                <?= htmlspecialchars($pet['species']) ?>
+                                <?php if (!empty($pet['breed'])) : ?>
+                                    | <?= htmlspecialchars($pet['breed']) ?>
+                                <?php endif; ?>
+                            </p>
+
+                            <p class="card-text">
+                                $<?= htmlspecialchars($pet['adoption_fee']) ?>
+                            </p>
+
+                            <p class="pet-subtitle">
+                                <?= htmlspecialchars($pet['username'] ?? 'Unknown') ?>
+                            </p>
+
+                            <a href="details.php?id=<?= htmlspecialchars($pet['pet_id']) ?>"
+                               class="btn btn-primary btn-sm">
+                                <span class="material-icons align-middle">visibility</span>
+                                View Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    </section>
 
 </main>
 
